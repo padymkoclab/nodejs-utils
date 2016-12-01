@@ -1,0 +1,39 @@
+{
+  "name": "NodeJsUtils",
+  "version": "0.0.1",
+  "description": "Collection utilities for JavaScript and NodeJS",
+  "keywords": [
+    "JS utils",
+    "NodeJS utils"
+  ],
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha tests/test_*.js --throw-deprecation",
+    "coverage": "istanbul cover --report none ./node_modules/.bin/_mocha -- -R spec tests/test_*.js --recursive",
+    "report": "istanbul report",
+    "rm_coverage": "rm -rf coverage",
+    "installed": "npm list --depth=0",
+    "lint": "./node_modules/.bin/eslint utils/requests.js",
+    "docs": "echo 1"
+  },
+  "author": "setivolkylany",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.11.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "mock-fs": "^3.12.1"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "index.js"
+}

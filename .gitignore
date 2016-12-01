@@ -1,0 +1,12 @@
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Dependency directories
+node_modules
+
+# Logs
+npm-debug.log
+
+
+*.sublime-workspace
