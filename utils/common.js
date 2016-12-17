@@ -1,5 +1,7 @@
+'use strict'
 
-module.exports = exports = {};
+
+var exports = module.exports = {};
 
 
 exports.range = function(start, end, step){
@@ -60,3 +62,6 @@ exports.unique = function(iterable){
         return iterable.filter(function(el, index) { return iterable.indexOf(el) == index });
     }
 }
+
+
+exports
