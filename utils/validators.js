@@ -1,23 +1,18 @@
+/*
+
+ */
+
+const email = value => Boolean(value.match(/^\w+@\w+-?\w+\.\w{2,5}$/));
 
 
-var exports = module.exports = {};
+const url = value => Boolean(value.match(
+    /^https?:\/\/((www\.\w+(-?\w+)?\.\w+(\.\w+)?)|((?!www\.)\w+(-?\w+)?\.\w+(\.\w+)?))((\/[~\w\d]+[×\?\.\-\/+=&\w\d]*[\w\/]?$)|(\/$)|$)/
+));
 
 
-exports.email = function(value){
-    return Boolean(value.match(/^\w+@\w+-?\w+\.\w{2,5}$/));
-};
+const domain = value => Boolean(value.match(/(^www\.\w+(-?\w+)?\.\w+$)|(^(?!www\.)\w+(-?\w+)?\.\w+(\.\w+)?$)/));
 
 
-exports.url = function(value){
-
-    return Boolean(value.match(
-        /^https?:\/\/((www\.\w+(-?\w+)?\.\w+(\.\w+)?)|((?!www\.)\w+(-?\w+)?\.\w+(\.\w+)?))((\/[~\w\d]+[×\?\.\-\/+=&\w\d]*[\w\/]?$)|(\/$)|$)/
-    ));
-};
-
-
-exports.domain = function(value){
-    return Boolean(value.match(/(^www\.\w+(-?\w+)?\.\w+$)|(^(?!www\.)\w+(-?\w+)?\.\w+(\.\w+)?$)/));
-};
-
-
+module.exports.email = email;
+module.exports.domain = domain;
+module.exports.url = url;

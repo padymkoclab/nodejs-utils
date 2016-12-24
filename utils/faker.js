@@ -1,4 +1,6 @@
-'strict';
+/*
+
+*/
 
 
 const crypto = require('crypto');
@@ -53,65 +55,56 @@ Faker.word = (maxLength = 20, register = 'lower') => {
 };
 
 
-Faker.integer = (min = 0, max = 1000, sign = '?') => {
-    const k = Math.random();
-    let number = k * (max - min + 1) + min;
-
-    switch (sign) {
-        case '?':
-            if (k < 0.5) {
-                number = -number;
-            }
-            break;
-        case '-':
-            number = -number;
-        default:
-            break;
-    }
-
-    return number;
-};
+Faker.float = (min = -1000, max = 1000) => (Math.random() * ((max - min) + 1)) + min;
+Faker.integer = (min = -1000, max = 1000) => Math.floor(Faker.float(min, max));
 
 
 Faker.value = () => {
-    let value;
     const k = Math.random();
 
-    if (k < 0.1) {
-        value = Math.random();
-    } else if (k < 0.2) {
-        value = new Date();
-    } else if (k < 0.3) {
-        value = Faker.text();
-    } else if (k < 0.4) {
-        value = new Date();
-    } else if (k < 0.5) {
-        value = Faker.integer();
-    } else if (k < 0.6) {
-        value = null;
-    } else if (k < 0.7) {
-        value = Math.random() > 0.5 ? true : false;
-    } else if (k < 0.8) {
-        value = () => {};
-    } else if (k < 0.9) {
-        value = {};
-    } else {
-        value = Faker.array();
+    switch (true) {
+
+        case (k < 0.1):
+            return Math.random();
+            break;
+        case (k < 0.2):
+            return new Date();
+            break;
+        case (k < 0.3):
+            return Faker.array(5);
+            break;
+        case (k < 0.4):
+            return new Date();
+            break;
+        case (k < 0.5):
+            return Faker.integer(-1000, 1000);
+            break;
+        case (k < 0.6):
+            return null;
+            break;
+        case (k < 0.7):
+            return Math.random() > 0.5 ? true : false;
+            break;
+        case (k < 0.8):
+            return () => {};
+            break;
+        case (k < 0.9):
+            return {};
+            break;
+        default:
+            return Faker.text(3, 10);
+            break;
     }
-    return value;
 };
 
 
-Faker.array = (length) => {
-    return Array.from({ length: length }, () => { return 1; });
-};
+Faker.array = (length = 10) => Array.from({ length }, () => Faker.value());
 
 
-Faker.object = () => {
+Faker.object = (countAttributes = 10) => {
     const obj = {};
-    const countAttributes = Math.random() * 20 % 20;
 
-    for (let i = 0; i < countAttributes; i++) {
+    for (let i = 0; i < countAttributes; i += 1) {
         const name = Faker.word();
         obj[name] = Faker.value();
     }
@@ -119,10 +112,3 @@ Faker.object = () => {
 };
 
 exports.Faker = Faker;
-
-
-console.log(Faker.word());
-console.log(Faker.word(10));
-console.log(Faker.word(10, 'upper'));
-console.log(Faker.word(10, 'lower'));
-console.log(Faker.word(10, 'title'));

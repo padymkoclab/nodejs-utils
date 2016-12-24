@@ -1,6 +1,6 @@
+/*
 
-
-var exports = module.exports = {};
+ */
 
 /**
  * Create counter up counter
@@ -12,26 +12,27 @@ var exports = module.exports = {};
  * reset() - reset value of counter to 0
  * continue() - if counter was stoped, start it with old value
  */
-exports.CounterTimer = function(){
+const CounterTimer = () => {
     this.counter = null;
     this.value = 0;
-    this.start = function(){
-        parent_this = this;
-        this.counter = setInterval(function(){
-            parent_this.value++;
+    this.start = () => {
+        const parentThis = this;
+        this.counter = setInterval(() => {
+            parentThis.value += 1;
         }, 1000);
     };
-    this.stop = function(){
+    this.stop = () => {
         clearInterval(this.counter);
     };
-    this.getvalue = function(){
-        return this.value;
-    };
-    this.reset = function(){
+    this.getvalue = () => this.value;
+    this.reset = () => {
         this.value = 0;
     };
-    this.continue = function(){
-        this.stop()
+    this.continue = () => {
+        this.stop();
         this.start();
     };
-}
+};
+
+
+module.exports.CounterTimer = CounterTimer;

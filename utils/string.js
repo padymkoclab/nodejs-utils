@@ -1,57 +1,65 @@
-'use strict'
+/*
 
-var exports = module.exports = {};
+*/
 
-const ASCII_UPPERCASE = ( () => {
-    var result = '';
-    for (var i = 65; i < 91; i++) {
+
+const ASCII_UPPERCASE = (() => {
+    let result = '';
+    for (let i = 65; i < 91; i += 1) {
         result += String.fromCharCode(i);
     }
     return result;
-}) ();
+})();
 
 
-const ASCII_LOWERCASE = ( () => {
-    var result = '';
-    for (var i = 97; i < 123; i++) {
+const ASCII_LOWERCASE = (() => {
+    let result = '';
+    for (let i = 97; i < 123; i += 1) {
         result += String.fromCharCode(i);
     }
     return result;
-}) ();
+})();
 
 
 const ASCII_LETTERS = ASCII_UPPERCASE + ASCII_LOWERCASE;
 
 
-var toTitleCase = (string) => {
-    return string.split(' ')
-        .map((string) => { return exports.toCapitalizeCase(string) })
-        .join(' ');
-}
+const toTitleCase = str => str.split(' ')
+    .map(str_ => exports.toCapitalizeCase(str_))
+    .join(' ');
 
 
-var toCapitalizeCase = (string) => {
-    return string.charAt(0)
-        .toUpperCase() + string.slice(1)
-        .toLowerCase();
-}
+const toCapitalizeCase = string => string.charAt(0)
+    .toUpperCase() + string.slice(1)
+    .toLowerCase();
 
 
-var toSwapCase = (string) => {
-    return string.split('').map((char) => {
-        if (char == char.toUpperCase()) {
+const toSwapCase = string => string.split('')
+    .map((char) => {
+        if (char === char.toUpperCase()) {
             return char.toLowerCase();
-        } else {
-            return char.toUpperCase();
         }
-    }).join('')
-}
+        return char.toUpperCase();
+    })
+    .join('');
 
 
-exports.ASCII_LOWERCASE = ASCII_LOWERCASE;
-exports.ASCII_UPPERCASE = ASCII_UPPERCASE;
-exports.ASCII_LETTERS = ASCII_LETTERS;
+const unique = (str) => {
+    if (typeof str !== 'string') {
+        throw TypeError('It is not string');
+    }
+    return str
+        .split('')
+        .filter((el, index) => str.indexOf(el) === index)
+        .join('');
+};
 
 
-exports.toTitleCase = toTitleCase;
-exports.toCapitalizeCase = toCapitalizeCase;
+module.exports.ASCII_LOWERCASE = ASCII_LOWERCASE;
+module.exports.ASCII_UPPERCASE = ASCII_UPPERCASE;
+module.exports.ASCII_LETTERS = ASCII_LETTERS;
+
+module.exports.toTitleCase = toTitleCase;
+module.exports.toCapitalizeCase = toCapitalizeCase;
+module.exports.toSwapCase = toSwapCase;
+module.exports.unique = unique;

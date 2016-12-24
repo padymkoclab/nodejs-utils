@@ -1,26 +1,38 @@
+/*
+
+ */
 
 const http = require('http');
+const https = require('https');
 const util = require('util');
+
 const validators = require('./validators');
 
-var exports = module.exports = {};
 
+class Request {
 
-var Request = function (url, auth = [], headers = []) {
-    this.url = url;
-    this.auth = auth;
-    this.headers = headers;
-    this.protocol = null;
-    this.host = null;
-    this.path = null;
-    this.options = null;
+    constructor (url, auth = [], headers = [] ) {
+        this.url = url;
+        this.auth = auth;
+        this.headers = headers;
+        this.protocol = null;
+        this.host = null;
+        this.path = null;
+        this.options = null;
+    }
+
+    report() {
+
+    }
+
 };
 
+/*
 Request.prototype.initialize = function () {
     if (!validators.url(this.url)) {
         throw new Error('Invalid URL');
     }
-    // return /^(\w+:)\/\//.exec(this.url)[1];
+    return /^(\w+:)\/\//.exec(this.url)[1];
 };
 
 Request.prototype.get = function () {
@@ -57,8 +69,6 @@ exports.Request = function (url, auth, headers) {
     request.initialize();
     return request;
 };
+*/
 
-
-var url = 'https://google.com';
-var request = new exports.Request(url);
-request.get();
+module.exports.request = Request;
