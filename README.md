@@ -2,9 +2,23 @@
 
 ## Collections utils for the JavaScript programming language and for the NodeJS
 
-Usage
+##### Usage
 
     ```npm install```
 
+##### Useful packages:
 
-Licensed by GNU GPL v3
+ - https://github.com/chriso/validator.js
+ - https://github.com/request/request
+ - https://github.com/visionmedia/debug
+ - http://passportjs.org/
+ - http://momentjs.com/
+ - http://documentup.com/kriskowal/q/
+ - https://d3js.org/
+ - https://jquery.com/
+ - https://github.com/marak/Faker.js/
+
+
+#### Licensed by BSD
+
+

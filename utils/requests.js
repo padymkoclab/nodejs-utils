@@ -4,6 +4,7 @@
 
 const http = require('http');
 const https = require('https');
+
 const util = require('util');
 
 const validators = require('./validators');
@@ -11,7 +12,7 @@ const validators = require('./validators');
 
 class Request {
 
-    constructor (url, auth = [], headers = [] ) {
+    constructor(url, auth = [], headers = []) {
         this.url = url;
         this.auth = auth;
         this.headers = headers;
@@ -21,54 +22,69 @@ class Request {
         this.options = null;
     }
 
-    report() {
+    initialize() {
+        if (!validators.url(this.url)) {
+            throw new Error('Invalid URL');
+        }
+        const parsedURL = /^(\w+:)\/\/([.-\w]+)\/(.*)/.exec(this.url);
+        this.protocol = this.url.split('//', 1)[0];
+        this.host = parsedURL[2];
+        this.path = `/${parsedURL[3]}`;
+        this.options = {
+            host: this.host,
+            path: this.path,
+            timeout: 3,
+        };
 
+        if (this.headers.length > 0) {
+            this.options.headers = this.headers;
+        }
+
+        if (this.auth.length > 0) {
+            this.options.auth = this.auth;
+        }
     }
 
-};
+    get() {
+        this.options.method = 'GET';
 
-/*
-Request.prototype.initialize = function () {
-    if (!validators.url(this.url)) {
-        throw new Error('Invalid URL');
+        let requestFunction;
+        if (this.protocol === 'https:') {
+            requestFunction = https.request;
+        } else if (this.protocol === 'http:') {
+            requestFunction = http.request;
+        }
+
+        requestFunction(this.options, this.responseHandler).end();
+        this.options.method = null;
     }
-    return /^(\w+:)\/\//.exec(this.url)[1];
-};
 
-Request.prototype.get = function () {
-    // this.options.method = 'GET';
-    // console.log(this.options);
-    var response = http.request;
-    // (
-        // this.options, this.responseHandler
-    // );
-    return response;
-};
+    responseHandler(response) {
+        response.setEncoding('utf8');
 
-Request.prototype.responseHandler = function (response) {
-    console.log(`Status: ${response.statusCode}`);
-    response.setEncoding('utf8');
+        let content = '';
+        response.on('data', (chunk) => {
+            content += chunk;
+        });
 
-    response.on('data', (chunk) => {
-    });
+        response.on('end', () => {
+            console.log(`Status: ${response.statusCode}`);
+        });
 
-    response.on('end', () => {
-        console.log('Request was finished.');
-    });
-
-    response.on('error', (e) => {
-        console.log(util.format('Occured errors: %s', e));
-    });
-
-    response.end();
-};
+        response.on('error', (e) => {
+            console.log(util.format('Occured errors: %s', e));
+        });
+    }
+}
 
 
-exports.Request = function (url, auth, headers) {
-    var request = new Request(url, auth, headers);
+/**
+ * const request = exports.Request('https://github.com/marak/Faker.js/');
+ * request.get();
+ *
+ */
+exports.Request = (url, auth, headers) => {
+    const request = new Request(url, auth, headers);
     request.initialize();
     return request;
 };
-*/
-
-module.exports.request = Request;
