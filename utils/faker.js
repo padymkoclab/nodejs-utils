@@ -9,9 +9,6 @@ const string = require('./string');
 const faker = require('faker');
 
 
-var exports = module.exports = {};
-
-
 const Faker = {};
 
 
@@ -56,8 +53,14 @@ Faker.word = (maxLength = 20, register = 'lower') => {
 };
 
 
+Faker.char = () => String.fromCharCode(Math.floor(Math.random() * (123 - 97) + 97));;
 Faker.float = (min = -1000, max = 1000) => (Math.random() * ((max - min) + 1)) + min;
 Faker.integer = (min = -1000, max = 1000) => Math.floor(Faker.float(min, max));
+Faker.date = () => new Date(
+    (new Date()).getFullYear() - Math.floor(Math.random() * 10),
+    Math.floor(Math.random() * 12),
+    Math.floor(Math.random() * 29)
+);
 
 
 Faker.value = () => {
@@ -100,6 +103,10 @@ Faker.value = () => {
 
 
 Faker.array = (length = 10) => Array.from({ length }, () => Faker.value());
+Faker.arrayInteger = (length = 10) => Array.apply(null, Array(length)).map(() => Faker.integer());
+Faker.arrayDates = (length = 10) => Array.apply(null, Array(length)).map(() => Faker.date());
+Faker.arrayChars = (length = 10) => Array.apply(null, Array(length)).map(() => Faker.char());
+Faker.arrayStrings = (length = 10) => Array.apply(null, Array(length)).map(() => Faker.word());
 
 
 Faker.object = (countAttributes = 10) => {
@@ -113,7 +120,7 @@ Faker.object = (countAttributes = 10) => {
 };
 
 
-exports.Faker = Faker;
+module.exports.Faker = Faker;
 
 
 const FAKER_PROVIDERS = {
@@ -276,15 +283,16 @@ const FAKER_PROVIDERS = {
     ]
 };
 
+const display_fakers = () => {
+    for (category in FAKER_PROVIDERS) {
+        console.log(`\n${category}`)
+        for (provider of FAKER_PROVIDERS[category]) {
+            console.log(`\t${category}.${provider}`);
 
-for (category in FAKER_PROVIDERS) {
-    console.log(`\n${category}`)
-    for (provider of FAKER_PROVIDERS[category]) {
-        console.log(`\t${category}.${provider}`);
+            for (i = 0; i < 10; i += 1) {
+                console.log(`\t\t${faker[category][provider]()}`);
+            }
 
-        for (i = 0; i < 10; i += 1) {
-            console.log(`\t\t${faker[category][provider]()}`);
         }
-
     }
 }

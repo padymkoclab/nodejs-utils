@@ -29,4 +29,22 @@ const range = (start, end, step = 1) => {
 };
 
 
+const zip = (...arrays) => {
+    const length = Math.min(...arrays.map(arr => arr.length));
+    return Array.from({ length }, (value, index) => arrays.map((array => array[index])));
+};
+
+
+const zipLongest = (placeholder = undefined, ...arrays) => {
+    const length = Math.max(...arrays.map(arr => arr.length));
+    return Array.from(
+        { length }, (value, index) => arrays.map(
+            array => array.length - 1 >= index ? array[index] : placeholder
+        )
+    );
+};
+
+
 module.exports.range = range;
+module.exports.zip = zip;
+module.exports.zipLongest = zipLongest;
