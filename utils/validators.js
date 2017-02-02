@@ -11,6 +11,8 @@ const url = value => Boolean(value.match(
 ));
 
 
+// http://stackoverflow.com/questions/13027854/javascript-regular-expression-validation-for-domain-name
+// http://stackoverflow.com/questions/31563489/domain-name-validation-using-regular-expression
 const domain = value => Boolean(value.match(/(^www\.\w+(-?\w+)?\.\w+$)|(^(?!www\.)\w+(-?\w+)?\.\w+(\.\w+)?$)/));
 
 

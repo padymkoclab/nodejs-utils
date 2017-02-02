@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <style type="text/css">
+
+        div img {
+            content: url('data:image/png;base64,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');
+            display: block;
+            width: 75px;
+            height: 75px;
+            margin: 0 auto;
+        }
+
+        div div{
+            width: 30%;
+            padding: 10px 50px;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div>
+            <img src="" id="img1">
+        </div>
+        <div>
+            <img src="" id="img2">
+        </div>
+        <div>
+            <img src="" id="img3">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $.extend($.easing, {
+            heartBeat: function(k, time, start_value = 0, end_value = 1, duration) {
+                if (k < 0.3) return Math.pow(k, 4) * 49.4;
+                else if (k < 0.4) return (9 * k) - 2.3;
+                else if (k < 0.5) return (-13 * k) + 6.5;
+                else if (k < 0.6) return (4 * k) - 2;
+                else if (k < 0.7) return 0.4;
+                else if (k < 0.75) return (4 * k) - 2.4;
+                else if (k < 0.8) return (-4 * k) + 3.6;
+                else if (k >= 0.8) return 1 - Math.sin(Math.acos(k));
+            },
+            heartIn: function(k, time, start_value, end_value, duration) {
+                return $.easing.heartBeat(k, time, start_value, end_value, duration);
+            },
+            heartOut: function(k, time, start_value, end_value, duration) {
+                return end_value - $.easing.heartBeat(1 - k, time, start_value, end_value, duration) + start_value;
+            },
+            heartInOut: function(k, time, start_value, end_value, duration) {
+                if (time < duration / 2) return $.easing.heartIn(k, time, start_value, end_value, duration);
+                return $.easing.heartOut(k, time, start_value, end_value, duration);
+            },
+        });
+
+        function heartBeat($element, easing, sign = '+') {
+            $element.animate({
+                width: `${sign}=50`,
+                height: `${sign}=50`,
+            }, 2000, easing, function() {
+                heartBeat($element, easing, sign === '+' ? '-' : '+');
+            });
+        }
+
+        heartBeat($('#img1'), 'heartIn');
+        heartBeat($('#img2'), 'heartOut');
+        heartBeat($('#img3'), 'heartInOut');
+
+    </script>
+</body>
+</html>
